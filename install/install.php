@@ -2,7 +2,6 @@
 
 function step_1()
 {
-    global $db;
 
     if (!empty($_POST['save1'])) {
         $pthost = $_POST['pthost'];
@@ -61,7 +60,6 @@ function step_1()
 
 function step_2()
 {
-    global $db;
 
     if (isset($_POST['save2'])) {
         $pthost = $_POST['pthost'];
@@ -99,7 +97,6 @@ function step_2()
 
 function step_3()
 {
-    global $db;
 
     if (isset($_POST['save3'])) {
         $pthost = $_POST['pthost'];
@@ -216,7 +213,6 @@ $step_3 = array(
 
 function tables()
 {
-    global $db;
 
     $connect = new mysqli($this->host2, $this->msuser, $this->mspass);
     $accdb = $this->db2;
@@ -291,5 +287,3 @@ function tables()
 
 }
 
-
-?>
