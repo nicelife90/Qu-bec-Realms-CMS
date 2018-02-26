@@ -4,7 +4,7 @@
   "homepage": "https://github.com/nicelife90/Quebec-Realms-CMS",
   "autoload": {
     "psr-4": {
-      "WoWCMS\\": "App/"
+      "WoWCMS\\": "app/"
     }
   },
   "require": {

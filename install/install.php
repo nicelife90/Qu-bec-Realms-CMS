@@ -1,6 +1,6 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . '/App/Helpers/Loader.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/app/Helpers/Loader.php';
 
 use WoWCMS\Helpers\Request;
 
