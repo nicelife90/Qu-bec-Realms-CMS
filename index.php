@@ -4,52 +4,17 @@ define("ACMS", TRUE);
 
 header('Content-Type: text/html; charset=utf-8');
 
+/**
+ * Install
+ */
 if (file_exists("./install") && !file_exists("./setup.done")) {
-
-    $includes = array(
-        "./core/lib/sql.php",
-        "./core/lib/global.php",
-        "./core/parser/template.php",
-        "./core/parser/install.php",
-    );
-
-    if (!empty($includes) && is_array($includes)) {
-        $error_inc = array();
-
-        foreach ($includes as $nr => $include) {
-            $inc = (!empty($include) ? include($include) : false);
-
-            error_reporting(1);
-
-            if (!$inc) {
-                $error_inc[] = $include;
-            }
-        }
-
-        if (!empty($error_inc)) {
-            $content = "One or more Install files are missing:<br /><table><tr><td><b>Path:</b></td></tr>";
-
-            foreach ($error_inc as $nr_e => $error) {
-                $content .= '<tr><td>' . $error . '</td></tr>';
-            }
-
-            $content .= '</table>';
-
-            die($content);
-        }
-    }
-
-    $style = "./install/index.php";
-
-    if (file_exists($style)) {
-        $file = file_get_contents($style);
-        echo $replace->parse($file, $data);
-    } else {
-        die("The Install file @ " . $style . " doesn't exist or is missing the index file.");
-    }
+  header("Location: install/index.php");
+  exit;
 }
 
-
+/**
+ * Load CMS
+ */
 else {
     $mtime = microtime();
     $mtime = explode(" ", $mtime);
@@ -131,14 +96,5 @@ else {
         die("The style @ " . $style . " doesn't exist or is missing the index file.");
     }
 
-    $mtime = microtime();
-    $mtime = explode(" ", $mtime);
-    $mtime = $mtime[1] + $mtime[0];
-    $endtime = $mtime;
-    $totaltime = ($endtime - $starttime);
-
-    echo "
-<!--Powered By Azer CMS V3.0. &copy; Copyright Azer-cms.com. All Rights Reserved.-->
-<!-- Page Generated In {$totaltime} Seconds (ACMS V3.0) -->";
 }
 ?>

@@ -1,0 +1,13 @@
+{
+  "name": "nicelife90/WoWCMS",
+  "description": "Trinity WoW 3.3.5 CMS",
+  "homepage": "https://github.com/nicelife90/Quebec-Realms-CMS",
+  "autoload": {
+    "psr-4": {
+      "WoWCMS\\": "App/"
+    }
+  },
+  "require": {
+    "vlucas/phpdotenv": "^2.4"
+  }
+}
