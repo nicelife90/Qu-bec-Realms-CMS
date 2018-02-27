@@ -75,7 +75,7 @@ CREATE TABLE `news` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci' AUTO_INCREMENT=1; 
 
-INSERT INTO `news` VALUES (1, 'Welcome to Azer CMS V3.0', 'Azer', 'First Post.', 'November 30, 2012', 'a3');
+INSERT INTO `news` VALUES (1, 'Welcome to WoW CMS V3.0', 'Azer', 'First Post.', 'November 30, 2012', 'a3');
 
 CREATE TABLE `realms` (
   `id` int(32) NOT NULL auto_increment,

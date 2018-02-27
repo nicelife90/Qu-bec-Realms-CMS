@@ -23,7 +23,7 @@
   date_default_timezone_set('US/Pacific');
     $date = date("l F d, Y @ g:i A");
     
-//- Paypal IPN Azer CMS V3.0
+//- Paypal IPN WoW CMS V3.0
   //- Read The Post From Paypal & Add 'CMD'
     $req = 'cmd=_notify-validate';
 

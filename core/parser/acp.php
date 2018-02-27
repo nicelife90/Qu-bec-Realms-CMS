@@ -75,7 +75,7 @@ if(!defined('ACMS')){ header("Location: ../../"); }
   
   $data = array(
   "ip" => $_SERVER['REMOTE_ADDR'],
-  "title" => "Azer CMS &bull; ACP",
+  "title" => "WoW CMS &bull; ACP",
   "session" => $admin,
   "staff_id" => $stid['staff_id'],
   "page_system" => page_system(),

@@ -4,7 +4,7 @@ header('Content-Type: text/html; charset=utf-8');
 
 if(file_exists("../install"))
 {
-  die("Please install Azer CMS V3.0 to access the Admin Control Panel.");
+  die("Please install WoW CMS V3.0 to access the Admin Control Panel.");
 }
 
 $mtime = microtime(); 

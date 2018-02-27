@@ -122,7 +122,7 @@ $soap_pass = "' . $soappass . '";
             //Create table to hold Private Messages
             "CREATE TABLE `messages` (`id` int(32) NOT NULL auto_increment, `title` varchar(84) default NULL, `body` longtext, `sender` varchar(64) default NULL, `user` varchar(64) default NULL, `date` varchar(64) default NULL, `unread` int(32) default '1', `inbox_copy` int(32) default '1', `outbox_copy` int(32) default '1', PRIMARY KEY  (`id`)) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci' AUTO_INCREMENT=1",
 
-            // Create table to store the news posts, while we're at it, let's steal their first post in the name of Azer CMS! >:)
+            // Create table to store the news posts, while we're at it, let's steal their first post in the name of WoW CMS! >:)
             "CREATE TABLE `news` (`id` int(32) NOT NULL auto_increment, `title` varchar(64) default NULL, `author` varchar(64) default NULL, `body` longtext, `date` varchar(32) default NULL, `avatar` varchar(150) default NULL, PRIMARY KEY  (`id`)) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE='utf8mb4_unicode_ci' AUTO_INCREMENT=1",
 
             // Create the realms table, so that way that the user can store their realm data for the CMS to access

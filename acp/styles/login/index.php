@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-us" xml:lang="en-us">
   <head>
     <!--
-    Html By Azer, Copyright 2012 Azer CMS. All Rights Reserved.
+    Html By Azer, Copyright 2012 WoW CMS. All Rights Reserved.
     Style Version: ACMS V3.0
     -->
     <title>{title}</title>
@@ -11,7 +11,7 @@
   </head>
   
   <body>
-    <div class="logo">Azer CMS<span style="font-size:10px;">ACP V3.0</span></div>
+    <div class="logo">WoW CMS<span style="font-size:10px;">ACP V3.0</span></div>
     
     <div class="body">
       <table align="center" id="tl">
@@ -33,7 +33,7 @@
       <table width="100%" id="ci">
         <tr>
           <td align="left">Ip Address: <b>{ip}</b></td>
-          <td align="right">Core: <input type="submit" value="Azer CMS" id="acms" OnClick="location.href='http://azer-cms.com'"></td>
+          <td align="right">Core: <input type="submit" value="WoW CMS" id="acms" OnClick="location.href='http://azer-cms.com'"></td>
         </tr>
       </table>
     </div>

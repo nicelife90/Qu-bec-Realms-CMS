@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-us" xml:lang="en-us">
   <head>
     <!--
-    Html By Azer, Copyright 2012 Azer CMS. All Rights Reserved.
+    Html By Azer, Copyright 2012 WoW CMS. All Rights Reserved.
     Style Version: ACMS V3.0
     -->
     <title>{title}</title>
@@ -104,7 +104,7 @@
       
       <div class="cbs">
         <div style="text-align:center;">
-          &copy; Copyright 2012 Azer CMS.<br/>
+          &copy; Copyright 2012 WoW CMS.<br/>
           All Rights Reserved.
         </div>
       </div>

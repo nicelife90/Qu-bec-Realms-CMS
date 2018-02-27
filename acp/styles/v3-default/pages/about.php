@@ -1,5 +1,5 @@
       <div class="content-header">
-        <div class="chs">Azer CMS V3.0</div>
+        <div class="chs">WoW CMS V3.0</div>
       </div>
       
       <div class="content-body">

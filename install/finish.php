@@ -20,7 +20,7 @@
                 <div class="card-header">Install Step 1 of 3 - Mysql Configuration</div>
                 <div class="card-body">
                     <div class="cbs">
-                        Thank you for choosing Azer CMS. To finish your install, delete the install folder, and click the Home button on the menu above.<br/>
+                        Thank you for choosing WoW CMS. To finish your install, delete the install folder, and click the Home button on the menu above.<br/>
                         <b>Staff ID:</b> {module.step_3.staff_id} <span style="color: #ff0000;">(Keep this safe!)</span>
                     </div>
                 </div>

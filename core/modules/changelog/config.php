@@ -1,5 +1,5 @@
 <?php if(!defined('ACMS')){ header("Location: ../../../"); }
-#- Azer CMS ChangeLog Module Version 1.0
+#- WoW CMS ChangeLog Module Version 1.0
   #- Author: Azer
     #- ChangeLog Module Configuration
       $config_limit = 5; //- Sets limit on how many ChangeLog posts will be displayed.
