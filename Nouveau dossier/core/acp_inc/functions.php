@@ -996,7 +996,7 @@ function style_action()
     global $db, $db_data;
 
     if (isset($_GET['page']) && !empty($_POST['save']) && $_GET['page'] == "manage_styles") {
-        $action = $_POST['install'];
+        $action = $_POST['index'];
         $sid = clean($_POST['id']);
         $path = strip($_POST['path']);
 
@@ -1053,7 +1053,7 @@ function acp_action()
     global $db, $db_data;
 
     if (isset($_GET['page']) && !empty($_POST['save']) && $_GET['page'] == "manage_styles_acp") {
-        $action = $_POST['install'];
+        $action = $_POST['index'];
         $sid = clean($_POST['id']);
         $path = strip($_POST['path']);
 
