@@ -16,9 +16,9 @@ use ThreenityCMS\Helpers\Path;
 ?>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1 id="module">Accueil</h1>
+            <h1 id="module">Dashboard</h1>
             <ol class="breadcrumb">
-                <li><a href="<?php echo Path::root(); ?>"><i class="fa fa-dashboard"></i>Accueil</a>
+                <li><a href="<?php echo Path::root(); ?>"><i class="fa fa-dashboard"></i>Dashboard</a>
                 </li>
 
             </ol>

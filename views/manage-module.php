@@ -19,7 +19,6 @@ use ThreenityCMS\Helpers\Path;
 use ThreenityCMS\Helpers\Request;
 use ThreenityCMS\Helpers\Session;
 use ThreenityCMS\Helpers\Utils;
-use ThreenityCMS\Repositories\Branch;
 use ThreenityCMS\Models\Threenity\GroupModel;
 use ThreenityCMS\Models\Threenity\MenuModel;
 use ThreenityCMS\Models\Threenity\ModuleModel;
