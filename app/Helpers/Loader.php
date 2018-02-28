@@ -1,29 +1,52 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Yanick Lafontaine
- * Date: 2018-02-25
- * Time: 20:38
+ * Copyright (C) 2014 - 2017 Threenity CMS - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary  and confidential
+ * Written by : nicelife90 <yanicklafontaine@gmail.com>
+ * Last edit : 2018
+ *
+ *
  */
 
-namespace WoWCMS\Helpers;
+/**
+ * Created by PhpStorm.
+ * User: ylafontaine
+ * Date: 26/07/2017
+ * Time: 11:03
+ */
+
+namespace ThreenityCMS\Helpers;
 
 use Dotenv\Dotenv;
+
+/**
+ * Validate PHP Version
+ */
+if (version_compare(phpversion(), '7.0', '<')) {
+
+    echo "Votre serveur utilise actuellement la version " . phpversion() . " de PHP, ce site nécessite au moins la version 7.0 de PHP pour fonctionner.";
+    die;
+}
+
 
 /**
  * Permet le retour en arrière sur une page expiré
  */
 session_cache_limiter('private_no_expire, must-revalidate');
 
+
 /**
  * Start session
  */
 session_start();
 
+
 /**
  * Permet de calculer le temps de loading de la page
  */
 $start_time = microtime(true);
+
 
 /**
  * Time Zone
@@ -40,11 +63,20 @@ ini_set('mssql.charset', 'UTF-8');
  */
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
+
 /**
  * Load .env file
  */
 $dotenv = new Dotenv($_SERVER['DOCUMENT_ROOT']);
 $dotenv->load();
+
+
+/**
+ * Debug bar initialization
+ * Also early initialize database class
+ */
+Debugbar::init();
+
 
 /**
  * Error setting
@@ -56,3 +88,7 @@ if (getenv("DEBUG") == 1) {
     error_reporting(0);
     ini_set('display_errors', 0);
 }
+
+
+
+

@@ -1,12 +1,22 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Yanick Lafontaine
- * Date: 2018-02-26
- * Time: 19:05
+ * Copyright (C) 2014 - 2017 Threenity CMS - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary  and confidential
+ * Written by : nicelife90 <yanicklafontaine@gmail.com>
+ * Last edit : 2018
+ *
+ *
  */
 
-namespace WoWCMS\Helpers;
+/**
+ * Created by PhpStorm.
+ * User: ylafontaine
+ * Date: 2017-10-16
+ * Time: 15:02
+ */
+
+namespace ThreenityCMS\Helpers;
 
 
 class Request
@@ -26,6 +36,7 @@ class Request
             return isset($_POST[$key]) ? $_POST[$key] : null;
         }
     }
+
     /**
      * Get get value
      *
@@ -41,6 +52,8 @@ class Request
             return isset($_GET[$key]) ? $_GET[$key] : null;
         }
     }
+
+
     /**
      * Get file value
      *
