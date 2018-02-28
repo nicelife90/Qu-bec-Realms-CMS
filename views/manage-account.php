@@ -21,6 +21,7 @@ use ThreenityCMS\Models\Threenity\AccountModel;
 use ThreenityCMS\Models\Threenity\GroupModel;
 use ThreenityCMS\Models\Threenity\ModuleModel;
 use ThreenityCMS\Helpers\Popover;
+
 ?>
     <div class="content-wrapper">
         <section class="content-header">
@@ -37,73 +38,73 @@ use ThreenityCMS\Helpers\Popover;
 
             <div class="row">
                 <div class="col-md-12">
-                    <?php
-                    if (Request::get('action') && Session::getFormId('manage-link') == Request::get('token')) {
-                        try {
-                            $message = ManageAccount::action();
-                            Messages::success($message);
-                        } catch (Exception $e) {
-                            Messages::error($e->getMessage());
-                        }
-                    }
-                    ?>
+					<?php
+					if (Request::get('action') && Session::getFormId('manage-link') == Request::get('token')) {
+						try {
+							$message = ManageAccount::action();
+							Messages::success($message);
+						} catch (Exception $e) {
+							Messages::error($e->getMessage());
+						}
+					}
+					?>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <?php
-                    if (!is_null(Request::post('save-group')) && Session::getFormId('mng-group') == Request::post('DBLP')) {
-                        try {
+					<?php
+					if (!is_null(Request::post('save-group')) && Session::getFormId('mng-group') == Request::post('DBLP')) {
+						try {
 
-                            if (Form::getReturn('edit_mode') == 1) {
+							if (Form::getReturn('edit_mode') == 1) {
 
-                                //EDIT
-                                if (ManageAccount::editGroup()) {
-                                    Messages::success("The group has been modified.");
-                                }
-                            } else {
+								//EDIT
+								if (ManageAccount::editGroup()) {
+									Messages::success("The group has been modified.");
+								}
+							} else {
 
-                                //ADD
-                                if (ManageAccount::addGroup()) {
-                                    Messages::success("The group has been created.");
-                                }
-                            }
+								//ADD
+								if (ManageAccount::addGroup()) {
+									Messages::success("The group has been created.");
+								}
+							}
 
-                        } catch (Exception $e) {
-                            Messages::error($e->getMessage());
-                        }
-                    }
-                    ?>
+						} catch (Exception $e) {
+							Messages::error($e->getMessage());
+						}
+					}
+					?>
                 </div>
             </div>
 
 
             <div class="row">
                 <div class="col-md-12">
-                    <?php
-                    if (!is_null(Request::post('save-account')) && Session::getFormId('mng-account') == Request::post('DBLP')) {
-                        try {
+					<?php
+					if (!is_null(Request::post('save-account')) && Session::getFormId('mng-account') == Request::post('DBLP')) {
+						try {
 
-                            if (Form::getReturn('edit_mode') == 1) {
+							if (Form::getReturn('edit_mode') == 1) {
 
-                                //EDIT
-                                if (ManageAccount::editAccount()) {
-                                    Messages::success("The account has been modified.");
-                                }
-                            } else {
+								//EDIT
+								if (ManageAccount::editAccount()) {
+									Messages::success("The account has been modified.");
+								}
+							} else {
 
-                                //ADD
-                                if (ManageAccount::addAccount()) {
-                                    Messages::success("The account has been created.");
-                                }
-                            }
+								//ADD
+								if (ManageAccount::addAccount()) {
+									Messages::success("The account has been created.");
+								}
+							}
 
-                        } catch (Exception $e) {
-                            Messages::error($e->getMessage());
-                        }
-                    }
-                    ?>
+						} catch (Exception $e) {
+							Messages::error($e->getMessage());
+						}
+					}
+					?>
                 </div>
             </div>
 
@@ -141,12 +142,12 @@ use ThreenityCMS\Helpers\Popover;
                                                             <select name="dashboard" class="form-control">
                                                                 <option value="-1" selected>Select Homepage
                                                                 </option>
-                                                                <?php
-                                                                $modules = ModuleModel::getAll();
-                                                                while ($module = $modules->fetchObject()) {
-                                                                    echo '<option value="' . $module->name . '" ' . (Form::getReturn('dashboard') == $module->name ? 'selected' : null) . '>' . $module->name . '</option>';
-                                                                }
-                                                                ?>
+																<?php
+																$modules = ModuleModel::getAll();
+																while ($module = $modules->fetchObject()) {
+																	echo '<option value="' . $module->name . '" ' . (Form::getReturn('dashboard') == $module->name ? 'selected' : null) . '>' . $module->name . '</option>';
+																}
+																?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -169,15 +170,16 @@ use ThreenityCMS\Helpers\Popover;
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <?php
-                                                    $groups = GroupModel::getAll();
-                                                    $token = Session::setFormId('manage-link');
-                                                    while ($group = $groups->fetchObject()) {
+													<?php
+													$groups = GroupModel::getAll();
+													$token = Session::setFormId('manage-link');
+													while ($group = $groups->fetchObject()) {
 
-                                                        $rm = '?action=delete_group&group_id=' . $group->group_id . '&token=' . $token;
-                                                        $vim = '?action=edit_group&group_id=' . $group->group_id . '&token=' . $token;
+														$rm = '?action=delete_group&group_id=' . $group->group_id . '&token=' . $token;
+														$vim = '?action=edit_group&group_id=' . $group->group_id . '&token=' . $token;
 
-                                                        echo '<tr>
+														if ($group->group_id != -1) {
+															echo '<tr>
                                                             <td>' . $group->group_name . '</td>
                                                             <td>' . $group->dashboard . '</td>
                                                             <td>
@@ -196,8 +198,15 @@ use ThreenityCMS\Helpers\Popover;
                                                             </a>
                                                             </td>
                                                             </tr>';
-                                                    }
-                                                    ?>
+														} else {
+															echo '<tr>
+                                                            <td>' . $group->group_name . '</td>
+                                                            <td>' . $group->dashboard . '</td>
+                                                            <td></td>
+                                                            </tr>';
+														}
+													}
+													?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -263,12 +272,12 @@ use ThreenityCMS\Helpers\Popover;
                                                             <select name="account_group" class="form-control">
                                                                 <option value="0" selected>Select Group
                                                                 </option>
-                                                                <?php
-                                                                $groups = GroupModel::getAll();
-                                                                while ($group = $groups->fetchObject()) {
-                                                                    echo '<option value="' . $group->group_id . '" ' . (Form::getReturn('account_group') == $group->group_id ? 'selected' : null) . '>' . $group->group_name . '</option>';
-                                                                }
-                                                                ?>
+																<?php
+																$groups = GroupModel::getAll();
+																while ($group = $groups->fetchObject()) {
+																	echo '<option value="' . $group->group_id . '" ' . (Form::getReturn('account_group') == $group->group_id ? 'selected' : null) . '>' . $group->group_name . '</option>';
+																}
+																?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -276,7 +285,7 @@ use ThreenityCMS\Helpers\Popover;
                                                 <br/>
                                                 <div class="row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label>Password<?php Popover::help("To keep current password, leave this field empty!")?></label>
+                                                        <label>Password<?php Popover::help("To keep current password, leave this field empty!") ?></label>
                                                         <div class="input-group"><span class="input-group-addon"><i
                                                                         class="fa fa-key"></i></span>
                                                             <input class="form-control" name="password" type="password"
@@ -314,17 +323,17 @@ use ThreenityCMS\Helpers\Popover;
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <?php
+											<?php
 
-                                            $accounts = AccountModel::getAll();
-                                            while ($account = $accounts->fetchObject()) {
+											$accounts = AccountModel::getAll();
+											while ($account = $accounts->fetchObject()) {
 
-                                                $rm = '?action=delete_account&id=' . $account->id . '&token=' . $token;
-                                                $vim = '?action=edit_account&id=' . $account->id . '&token=' . $token;
-                                                $rst = '?action=reset_pwd&id=' . $account->id . '&token=' . $token;
-                                                $unl = '?action=unlock&id=' . $account->id . '&token=' . $token;
+												$rm = '?action=delete_account&id=' . $account->id . '&token=' . $token;
+												$vim = '?action=edit_account&id=' . $account->id . '&token=' . $token;
+												$rst = '?action=reset_pwd&id=' . $account->id . '&token=' . $token;
+												$unl = '?action=unlock&id=' . $account->id . '&token=' . $token;
 
-                                                echo '<tr>
+												echo '<tr>
                                                         <td>' . $account->first_name . '</td>
                                                         <td>' . $account->last_name . '</td>
                                                         <td>' . $account->username . '</td>
@@ -362,8 +371,8 @@ use ThreenityCMS\Helpers\Popover;
                                                             </a>
                                                         </td>
                                                         </tr>';
-                                            }
-                                            ?>
+											}
+											?>
                                             </tbody>
                                         </table>
                                     </div>

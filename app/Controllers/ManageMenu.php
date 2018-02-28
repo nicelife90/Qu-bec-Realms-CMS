@@ -9,12 +9,6 @@
  *
  */
 
-/**
- * Created by PhpStorm.
- * User: ylafontaine
- * Date: 2017-10-17
- * Time: 14:59
- */
 
 namespace ThreenityCMS\Controllers;
 
@@ -27,137 +21,137 @@ use Exception;
 class ManageMenu
 {
 
-    /**
-     * Handle multiples actions in menu management.
-     *
-     * @return null|string
-     */
-    public static function action()
-    {
+	/**
+	 * Handle multiples actions in menu management.
+	 *
+	 * @return null|string
+	 */
+	public static function action()
+	{
 
-        $menu_id = Request::get('menu_id');
-        $action = Request::get('action');
+		$menu_id = Request::get('menu_id');
+		$action = Request::get('action');
 
-        $msg = null;
-        switch ($action) {
+		$msg = null;
+		switch ($action) {
 
-            case "delete":
+			case "delete":
 
-                $count = MenuModel::getCount();
-                $position = MenuModel::getOrder($menu_id);
+				$count = MenuModel::getCount();
+				$position = MenuModel::getOrder($menu_id);
 
-                //Last position
-                if ($position == $count) {
-                    MenuModel::delete($menu_id);
-                } //Other than last position
-                else {
-                    MenuModel::delete($menu_id);
-                    MenuModel::decrement($position);
+				//Last position
+				if ($position == $count) {
+					MenuModel::delete($menu_id);
+				} //Other than last position
+				else {
+					MenuModel::delete($menu_id);
+					MenuModel::decrement($position);
 
-                }
+				}
 
-                $msg = "Opération terminé.";
+				$msg = "This menu has been deleted.";
 
-                break;
-
-
-            case "up":
-
-                $current_position = MenuModel::getOrder($menu_id);
-
-                if ($current_position > 1) { //true
-                    $previous_id = MenuModel::getPrevious($current_position);
-                    MenuModel::goUp($menu_id, $previous_id, $current_position);
-                }
-
-                $msg = "Opération terminé.";
-
-                break;
+				break;
 
 
-            case "down":
+			case "up":
 
-                $count = MenuModel::getCount();
-                $current_position = MenuModel::getOrder($menu_id);
+				$current_position = MenuModel::getOrder($menu_id);
 
-                if ($current_position < $count) {
-                    $next_id = MenuModel::getNext($current_position);
-                    MenuModel::goDown($menu_id, $next_id, $current_position);
-                }
+				if ($current_position > 1) { //true
+					$previous_id = MenuModel::getPrevious($current_position);
+					MenuModel::goUp($menu_id, $previous_id, $current_position);
+				}
 
-                $msg = "Opération terminé.";
+				$msg = "Move Up Completed.";
 
-                break;
-        }
-
-        return $msg;
-    }
-
-    /**
-     * Create new user account
-     *
-     * @return bool
-     * @throws Exception
-     */
-    public static function add()
-    {
+				break;
 
 
-        /**
-         * Save form data
-         */
-        Form::save(Request::post());
+			case "down":
 
-        /**
-         * Form value
-         */
-        $title = Request::post('title');
-        $icon = Request::post('icon');
+				$count = MenuModel::getCount();
+				$current_position = MenuModel::getOrder($menu_id);
 
-        /**
-         * Title validate
-         */
-        if (empty($title)) {
-            Form::remove('title');
-            throw new Exception("Vous devez entrer un titre.");
-        }
+				if ($current_position < $count) {
+					$next_id = MenuModel::getNext($current_position);
+					MenuModel::goDown($menu_id, $next_id, $current_position);
+				}
 
-        /**
-         * Icon validate
-         */
-        if ($icon == -1) {
-            Form::remove('icon');
-            throw new Exception("Vous choisir une icône.");
-        }
+				$msg = "Move Down Completed.";
+
+				break;
+		}
+
+		return $msg;
+	}
+
+	/**
+	 * Create new user account
+	 *
+	 * @return bool
+	 * @throws Exception
+	 */
+	public static function add()
+	{
 
 
-        /**
-         * Check if MenuModel already have same name.
-         */
-        if (!empty($title) && !Database::fieldIsUnique('ae_menu', 'title', $title)) {
-            Form::remove('title');
-            throw new Exception("Un autre menu porte déjà le même nom.");
-        }
+		/**
+		 * Save form data
+		 */
+		Form::save(Request::post());
 
-        /**
-         * Prepare data
-         */
-        $menu = [
-            "title" => $title,
-            "icon" => $icon,
-            "display_order" => MenuModel::getCount() + 1,
-        ];
+		/**
+		 * Form value
+		 */
+		$title = Request::post('title');
+		$icon = Request::post('icon');
 
-        try {
+		/**
+		 * Title validate
+		 */
+		if (empty($title)) {
+			Form::remove('title');
+			throw new Exception("You must enter a title.");
+		}
 
-            MenuModel::add($menu);
+		/**
+		 * Icon validate
+		 */
+		if ($icon == -1) {
+			Form::remove('icon');
+			throw new Exception("You must choose an icon.");
+		}
 
-            Form::destroy();
 
-            return true;
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
-    }
+		/**
+		 * Check if MenuModel already have same name.
+		 */
+		if (!empty($title) && !Database::fieldIsUnique('ae_menu', 'title', $title)) {
+			Form::remove('title');
+			throw new Exception("Another menu already has the same name.");
+		}
+
+		/**
+		 * Prepare data
+		 */
+		$menu = [
+			"title"         => $title,
+			"icon"          => $icon,
+			"display_order" => MenuModel::getCount() + 1,
+		];
+
+		try {
+
+			MenuModel::add($menu);
+
+			Form::destroy();
+
+			return true;
+		} catch (Exception $e) {
+			throw new Exception($e->getMessage());
+		}
+	}
 }
 

@@ -20,10 +20,9 @@ use ThreenityCMS\Models\Threenity\RbacModel;
 ?>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1 id="module">Gestion des permissions</h1>
+            <h1 id="module">RBAC Management</h1>
             <ol class="breadcrumb">
-                <li><a href="<?php echo Path::module(); ?>/manage-rbac.php"><i class="fa fa-dashboard"></i>Gestion des
-                        permissions</a>
+                <li><a href="<?php echo Path::module(); ?>/manage-rbac.php"><i class="fa fa-dashboard"></i>RBAC Management</a>
                 </li>
 
             </ol>
@@ -48,9 +47,15 @@ use ThreenityCMS\Models\Threenity\RbacModel;
 
             <div class="row">
                 <div class="col-md-12">
+
+                    <div class="alert alert-warning">
+                        <p>This page is for advanced users. Mishandling on this page could prevent the CMS from operating normally.</p>
+                    </div>
+
+
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Édition des permissions</h3>
+                            <h3 class="box-title">RBAC</h3>
                         </div>
 
                         <div class="box-body">
@@ -127,11 +132,11 @@ use ThreenityCMS\Models\Threenity\RbacModel;
 
                     success: function (msg) {
 
-                        var modeText = mode === "add" ? "ajouté au" : "supprimé du";
+                        var modeText = mode === "add" ? "added to" : "deleted from";
 
                         document.querySelector('#good-box').classList.remove("hidden");
                         document.querySelector('#bad-box').classList.add("hidden");
-                        document.querySelector('#good-msg').innerText = "La permission #" + rbac + " a bien été " + modeText + " groupe #" + group;
+                        document.querySelector('#good-msg').innerText = "Permission #" + rbac + " was well " + modeText + " group #" + group;
 
                         if (msg.status !== 200) {
                             document.querySelector('#good-box').classList.add("hidden");
@@ -142,7 +147,7 @@ use ThreenityCMS\Models\Threenity\RbacModel;
                     error: function () {
                         document.querySelector('#good-box').classList.add("hidden");
                         document.querySelector('#bad-box').classList.remove("hidden");
-                        document.querySelector('#bad-msg').innerText = "Une erreur inattendu s'est produite.";
+                        document.querySelector('#bad-msg').innerText = "An unexpected error has occurred.";
                     }
                 });
             }

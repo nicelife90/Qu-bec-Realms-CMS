@@ -22,10 +22,9 @@ use ThreenityCMS\Helpers\Session;
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1 id="module">Mon compte</h1>
+            <h1 id="module">My Account</h1>
             <ol class="breadcrumb">
-                <li><a href="<?php echo Path::module(); ?>/profile.php"><i class="fa fa-dashboard"></i> Mon
-                        compte</a>
+                <li><a href="<?php echo Path::module(); ?>/profile.php"><i class="fa fa-dashboard"></i>My Account</a>
                 </li>
             </ol>
         </section>
@@ -38,12 +37,7 @@ use ThreenityCMS\Helpers\Session;
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Gestion du compte</h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                            class="fa fa-minus"></i>
-                                </button>
-                            </div>
+                            <h3 class="box-title">Manage</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -54,7 +48,7 @@ use ThreenityCMS\Helpers\Session;
                                     if (!is_null(Request::post('edit')) && Session::getFormId('edit') == Request::post('DBLP')) {
                                         try {
                                             if (Profile::update()) {
-                                                Messages::success("Votre compte a bien été mis à jour!");
+                                                Messages::success("Your account has been updated!");
                                             }
                                         } catch (Exception $e) {
                                             Messages::error($e->getMessage());
@@ -72,28 +66,28 @@ use ThreenityCMS\Helpers\Session;
                                                value="<?php echo Session::setFormId('edit'); ?>">
                                         <div class="row">
                                             <div class="col-sm-6 col-md-6">
-                                                <label>Mot de passe</label>
+                                                <label>Password</label>
                                                 <div class="input-group"><span class="input-group-addon"><i
                                                                 class="fa fa-key"></i></span>
                                                     <input class="form-control" name="pwd" type="password"
-                                                           placeholder="Laisser vide pour conserver votre mot de passe">
+                                                           placeholder="Leave blank to keep your password">
                                                 </div>
                                             </div>
                                         </div>
                                         <br/>
                                         <div class="row">
                                             <div class="col-sm-6 col-md-6">
-                                                <label>Photo</label>
+                                                <label>Profile Image</label>
                                                 <div class="form-group">
                                                     <input type="file" name="img" class="file">
                                                     <div class="input-group col-xs-12">
                                                         <span class="input-group-addon"><i
                                                                     class="fa fa-image"></i></span>
                                                         <input type="text" class="form-control" disabled
-                                                               placeholder="Téléverser une image">
+                                                               placeholder="Upload an image">
                                                         <span class="input-group-btn">
                                                         <button class="browse btn btn-danger btn-flat" type="button"><i
-                                                                    class="glyphicon glyphicon-search"></i> Parcourir</button></span>
+                                                                    class="glyphicon glyphicon-search"></i> Browse</button></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -102,7 +96,7 @@ use ThreenityCMS\Helpers\Session;
                                             <div class="col-md-6">
                                                 <input style="margin-top: 15px;" type="submit"
                                                        class="btn btn-success btn-block btn-flat"
-                                                       name="edit" value="Enregistrer">
+                                                       name="edit" value="Save">
                                             </div>
                                         </div>
                                     </form>

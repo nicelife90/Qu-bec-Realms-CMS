@@ -81,10 +81,17 @@ use ThreenityCMS\Models\Threenity\ModuleModel;
 
             <div class="row">
                 <div class="col-md-12">
+
+                    <div class="alert alert-warning">
+                        <p>This page is for advanced users. Mishandling on this page could prevent the CMS from operating normally.</p>
+                    </div>
+
+
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Create / Edit</h3>
+                            <h3 class="box-title">Module</h3>
                         </div>
+
 
                         <div class="box-body">
                             <div class="row">

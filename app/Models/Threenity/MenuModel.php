@@ -21,140 +21,140 @@ use Exception;
  */
 class MenuModel
 {
-    /**
-     * Get all menu elements
-     *
-     * @return \PDOStatement
-     */
-    public static function getAll()
-    {
-        $db = Database::get();
+	/**
+	 * Get all menu elements
+	 *
+	 * @return \PDOStatement
+	 */
+	public static function getAll()
+	{
+		$db = Database::get();
 
-        $menu = $db->query("SELECT * FROM ae_menu ORDER BY display_order");
+		$menu = $db->query("SELECT * FROM ae_menu ORDER BY display_order");
 
-        return $menu;
-    }
-
-
-    /**
-     * Get menu name
-     *
-     * @param $menu_id - menu id
-     *
-     * @return mixed
-     */
-    public static function getNameById($menu_id)
-    {
-        $db = Database::get();
-
-        $name = $db->query("SELECT title FROM ae_menu WHERE menu_id=$menu_id")->fetchObject()->title;
-
-        return $name;
-    }
-
-    /**
-     * Get childs elements of a menu
-     *
-     * @param $menu_id - Parent ID
-     * @param $group_id - Group ID
-     *
-     * @return array|null
-     */
-    public static function getChilds($menu_id, $group_id)
-    {
-        $db = Database::get();
-
-        $final_modules = null;
-        $modules = $db->query("SELECT * FROM ae_module WHERE parent = $menu_id AND active = 1 AND static = 0");
-        while ($module = $modules->fetchObject()) {
-
-            $groups = explode(";", $module->access_level);
-
-            if (in_array($group_id, $groups)) {
-                $final_modules[] = $module;
-            }
-        }
-
-        return $final_modules;
-    }
-
-    /**
-     * Count childs items
-     *
-     * @param $menu_id
-     *
-     * @return mixed
-     */
-    public static function getChildsCount($menu_id, $group_id)
-    {
-        $db = Database::get();
-
-        $count = 0;
-        $modules = $db->query("SELECT *  FROM ae_module WHERE parent = $menu_id AND active = 1 AND static = 0");
-        while ($module = $modules->fetchObject()) {
-
-            $groups = explode(";", $module->access_level);
-
-            if (in_array($group_id, $groups)) {
-                $count++;
-            }
-        }
-
-        return $count;
-    }
+		return $menu;
+	}
 
 
-    /**
-     * Get display order
-     *
-     * @param $menu_id - MenuModel id
-     *
-     * @return mixed
-     */
-    public static function getOrder($menu_id)
-    {
-        $db = Database::get();
+	/**
+	 * Get menu name
+	 *
+	 * @param $menu_id - menu id
+	 *
+	 * @return mixed
+	 */
+	public static function getNameById($menu_id)
+	{
+		$db = Database::get();
 
-        $order = $db->query("SELECT display_order FROM ae_menu WHERE menu_id = $menu_id")->fetchObject()->display_order;
+		$name = $db->query("SELECT title FROM ae_menu WHERE menu_id=$menu_id")->fetchObject()->title;
 
-        return $order;
-    }
+		return $name;
+	}
+
+	/**
+	 * Get childs elements of a menu
+	 *
+	 * @param $menu_id  - Parent ID
+	 * @param $group_id - Group ID
+	 *
+	 * @return array|null
+	 */
+	public static function getChilds($menu_id, $group_id)
+	{
+		$db = Database::get();
+
+		$final_modules = null;
+		$modules = $db->query("SELECT * FROM ae_module WHERE parent = $menu_id AND active = 1 AND static = 0");
+		while ($module = $modules->fetchObject()) {
+
+			$groups = explode(";", $module->access_level);
+
+			if (in_array($group_id, $groups)) {
+				$final_modules[] = $module;
+			}
+		}
+
+		return $final_modules;
+	}
+
+	/**
+	 * Count childs items
+	 *
+	 * @param $menu_id
+	 *
+	 * @return mixed
+	 */
+	public static function getChildsCount($menu_id, $group_id)
+	{
+		$db = Database::get();
+
+		$count = 0;
+		$modules = $db->query("SELECT *  FROM ae_module WHERE parent = $menu_id AND active = 1 AND static = 0");
+		while ($module = $modules->fetchObject()) {
+
+			$groups = explode(";", $module->access_level);
+
+			if (in_array($group_id, $groups)) {
+				$count++;
+			}
+		}
+
+		return $count;
+	}
 
 
-    /**
-     * Count items
-     *
-     * @return mixed
-     */
-    public static function getCount()
-    {
-        $db = Database::get();
+	/**
+	 * Get display order
+	 *
+	 * @param $menu_id - MenuModel id
+	 *
+	 * @return mixed
+	 */
+	public static function getOrder($menu_id)
+	{
+		$db = Database::get();
 
-        $count = $db->query("SELECT COUNT(*) AS C FROM ae_menu")->fetchObject()->C;
+		$order = $db->query("SELECT display_order FROM ae_menu WHERE menu_id = $menu_id")->fetchObject()->display_order;
 
-        return $count;
-    }
+		return $order;
+	}
 
-    /**
-     * Get next menu Id
-     *
-     * @return mixed
-     */
-    public static function getNextMenuId()
-    {
-        return Database::getNextAutoIncrementId("ae_menu");
-    }
 
-    /**
-     * Create AccountModel
-     *
-     * @param $data - AccountModel Data
-     */
-    public static function add($data)
-    {
-        $db = Database::get();
+	/**
+	 * Count items
+	 *
+	 * @return mixed
+	 */
+	public static function getCount()
+	{
+		$db = Database::get();
 
-        $query = "	INSERT INTO 
+		$count = $db->query("SELECT COUNT(*) AS C FROM ae_menu")->fetchObject()->C;
+
+		return $count;
+	}
+
+	/**
+	 * Get next menu Id
+	 *
+	 * @return mixed
+	 */
+	public static function getNextMenuId()
+	{
+		return Database::getNextAutoIncrementId("ae_menu");
+	}
+
+	/**
+	 * Create AccountModel
+	 *
+	 * @param $data - AccountModel Data
+	 */
+	public static function add($data)
+	{
+		$db = Database::get();
+
+		$query = "	INSERT INTO 
 					  ae_menu (
 					  	menu_id,
 						title, 
@@ -168,130 +168,126 @@ class MenuModel
 						:display_order 
 					)";
 
-        $sth = $db->prepare($query);
+		$sth = $db->prepare($query);
 
-        $sth->execute([
-            "menu_id" => self::getNextMenuId(),
-            "title" => $data["title"],
-            "icon" => $data["icon"],
-            "display_order" => $data["display_order"],
-        ]);
-    }
+		$sth->execute([
+			"menu_id"       => self::getNextMenuId(),
+			"title"         => $data["title"],
+			"icon"          => $data["icon"],
+			"display_order" => $data["display_order"],
+		]);
+	}
 
-    /**
-     * Delete menu
-     *
-     * @param $menu_id - MenuModel ID
-     */
-    public static function delete($menu_id)
-    {
+	/**
+	 * Delete menu
+	 *
+	 * @param $menu_id - MenuModel ID
+	 */
+	public static function delete($menu_id)
+	{
 
-        if ($menu_id == -1) {
-            throw new Exception("La suppression de ce menu n'est pas permise.");
-        }
+		$db = Database::get();
 
-        $db = Database::get();
-
-        $query = "	DELETE FROM 
+		$query = "	DELETE FROM 
 						ae_menu 
 					WHERE 
 						menu_id = :menu_id";
 
-        $sth = $db->prepare($query);
+		$sth = $db->prepare($query);
 
-        $sth->execute([
-            "menu_id" => $menu_id,
-        ]);
+		$sth->execute([
+			"menu_id" => $menu_id,
+		]);
 
-    }
+	}
 
 
-    /**
-     * Decrement all display order from start position
-     *
-     * @param $start_position - Decrement under this position
-     */
-    public static function decrement($start_position)
-    {
+	/**
+	 * Decrement all display order from start position
+	 *
+	 * @param $start_position - Decrement under this position
+	 */
+	public static function decrement($start_position)
+	{
 
-        $db = Database::get();
+		$db = Database::get();
 
-        $updates = $db->query("SELECT * FROM ae_menu WHERE display_order > $start_position");
+		$updates = $db->query("SELECT * FROM ae_menu WHERE display_order > $start_position");
 
-        while ($update = $updates->fetchObject()) {
-            $db->query("UPDATE 
+		while ($update = $updates->fetchObject()) {
+			$db->query("UPDATE 
 									ae_menu 
 								  SET 
 								  	display_order = " . ($update->display_order - 1) . " 
 								  WHERE id = " . $update->id);
-        }
-    }
+		}
+	}
 
-    /**
-     * Get previous position
-     *
-     * @param $position - Initial position
-     */
-    public static function getPrevious($position)
-    {
+	/**
+	 * Get previous position
+	 *
+	 * @param $position - Initial position
+	 */
+	public static function getPrevious($position)
+	{
 
-        $db = Database::get();
+		$db = Database::get();
 
-        $previous = $db->query("SELECT menu_id FROM ae_menu WHERE display_order = " . ($position - 1))->fetchObject()->menu_id;
+		$previous = $db->query("SELECT menu_id FROM ae_menu WHERE display_order = " . ($position - 1))->fetchObject()->menu_id;
 
-        return $previous;
-    }
-
-
-    /**
-     * Get next position
-     *
-     * @param $position - Initial position
-     */
-    public static function getNext($position)
-    {
-
-        $db = Database::get();
-
-        $next = $db->query("SELECT menu_id FROM ae_menu WHERE display_order = " . ($position + 1))->fetchObject()->menu_id;
-
-        return $next;
-    }
+		return $previous;
+	}
 
 
-    /**
-     * Move menu display position Up
-     *
-     * @param $id - MenuModel id
-     * @param $previous_id - MenuModel previous id
-     * @param $current_position - Current display position
-     */
-    public static function goUp($id, $previous_id, $current_position)
-    {
+	/**
+	 * Get next position
+	 *
+	 * @param $position - Initial position
+	 */
+	public static function getNext($position)
+	{
 
-        $statements = [
-            "UPDATE ae_menu SET display_order = " . ($current_position - 1) . " WHERE menu_id = " . $id,
-            "UPDATE ae_menu SET display_order = $current_position WHERE menu_id = " . $previous_id,
-        ];
+		$db = Database::get();
 
-        Database::transaction($statements);
-    }
+		$next = $db->query("SELECT menu_id FROM ae_menu WHERE display_order = " . ($position + 1))->fetchObject()->menu_id;
 
-    /**
-     * Move menu display position Down
-     *
-     * @param $id - MenuModel id
-     * @param $next_id - MenuModel next id
-     * @param $current_position - Current display position
-     */
-    public static function goDown($id, $next_id, $current_position)
-    {
+		return $next;
+	}
 
-        $statements = [
-            "UPDATE ae_menu SET display_order = " . ($current_position + 1) . " WHERE menu_id = " . $id,
-            "UPDATE ae_menu SET display_order = $current_position WHERE menu_id = " . $next_id,
-        ];
 
-        Database::transaction($statements);
-    }
+	/**
+	 * Move menu display position Up
+	 *
+	 * @param $id               - MenuModel id
+	 * @param $previous_id      - MenuModel previous id
+	 * @param $current_position - Current display position
+	 */
+	public static function goUp($id, $previous_id, $current_position)
+	{
+
+		$statements = [
+			"UPDATE ae_menu SET display_order = " . ($current_position - 1) . " WHERE menu_id = " . $id,
+			"UPDATE ae_menu SET display_order = $current_position WHERE menu_id = " . $previous_id,
+		];
+
+		Database::transaction($statements);
+	}
+
+	/**
+	 * Move menu display position Down
+	 *
+	 * @param $id               - MenuModel id
+	 * @param $next_id          - MenuModel next id
+	 * @param $current_position - Current display position
+	 */
+	public static function goDown($id, $next_id, $current_position)
+	{
+
+		$statements = [
+			"UPDATE ae_menu SET display_order = " . ($current_position + 1) . " WHERE menu_id = " . $id,
+			"UPDATE ae_menu SET display_order = $current_position WHERE menu_id = " . $next_id,
+		];
+
+		Database::transaction($statements);
+	}
 }

@@ -36,17 +36,29 @@ class ManageAccount
 
 			case "edit_group" :
 
-				$group_data = GroupModel::getByGroupId(Request::get('group_id'), true);
-				Form::save($group_data, true);
-				$msg = "The group has been loaded.";
+				$group_id = Request::get('group_id');
+				if ($group_id == -1) {
+					throw new Exception("This group can't be edited.");
+				} else {
+					$group_data = GroupModel::getByGroupId(Request::get('group_id'), true);
+					Form::save($group_data, true);
+					$msg = "The group has been loaded.";
+				}
+
 
 				break;
 
 			case "delete_group":
 
-				GroupModel::delete(Request::get('group_id'));
+				$group_id = Request::get('group_id');
+				if ($group_id == -1) {
+					throw new Exception("This group can't be deleted.");
+				} else {
 
-				$msg = "The group has been deleted.";
+					GroupModel::delete($group_id);
+
+					$msg = "The group has been deleted.";
+				}
 
 				break;
 

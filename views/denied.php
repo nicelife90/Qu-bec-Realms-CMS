@@ -16,9 +16,9 @@ use ThreenityCMS\Helpers\Path;
 ?>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1 id="module" class="hidden">Accès refusé</h1>
+            <h1 id="module" class="hidden">Access denied</h1>
             <ol class="breadcrumb hidden">
-                <li><a href="<?php echo Path::module(); ?>/denied.php"><i class="fa fa-dashboard"></i>Accès refusé</a>
+                <li><a href="<?php echo Path::module(); ?>/denied.php"><i class="fa fa-dashboard"></i>Access denied</a>
                 </li>
 
             </ol>
