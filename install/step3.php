@@ -1,4 +1,14 @@
 <?php
+/**
+ * Copyright (C) 2014 - 2017 Threenity CMS - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary  and confidential
+ * Written by : nicelife90 <yanicklafontaine@gmail.com>
+ * Last edit : 2018
+ *
+ *
+ */
+
 session_start();
 if (!isset($_SESSION["INSTALL"])) {
 	echo "Unable to directly access the application installation folder!";
@@ -49,3 +59,7 @@ if (!isset($_SESSION["INSTALL"])) {
 </div>
 </body>
 </html>
+<?php
+unset($_SESSION["f"]);
+unset($_SESSION["error"]);
+?>

@@ -1,8 +1,18 @@
 <?php
+/**
+ * Copyright (C) 2014 - 2017 Threenity CMS - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary  and confidential
+ * Written by : nicelife90 <yanicklafontaine@gmail.com>
+ * Last edit : 2018
+ *
+ *
+ */
+
 session_start();
 if (!isset($_SESSION["INSTALL"])) {
-	echo "Unable to directly access the application installation folder!";
-	die;
+    echo "Unable to directly access the application installation folder!";
+    die;
 }
 ?>
 <!doctype html>
@@ -40,12 +50,13 @@ if (!isset($_SESSION["INSTALL"])) {
                 <div class="col-md-12">
                     <h3>Threenity CMS - Configuration</h3>
 
-					<?php
-					if (isset($error) && count($error) > 0) {
-						$err = implode("<br/>", $error);
-						echo "<div class='alert alert-danger'>$err</div>";
-					}
-					?>
+                    <br/>
+                    <?php
+                    if (isset($_SESSION["error"]) && count($_SESSION["error"]) > 0) {
+                        $err = implode("<br/>", $_SESSION["error"]);
+                        echo "<div class='alert alert-danger'>$err</div>";
+                    }
+                    ?>
 
                     <br/>
                     <h4>MySQL</h4>
@@ -56,28 +67,33 @@ if (!isset($_SESSION["INSTALL"])) {
                     </div>
                     <div class="form-group">
                         <label class="control-label">MySQL Host</label>
-                        <input maxlength="200" type="text" required="required" class="form-control"
-                               placeholder="Enter MySQL Host" name="mhost"/>
+                        <input type="text" required="required" class="form-control"
+                               placeholder="Enter MySQL Host" name="mhost"
+                               value="<?php echo isset($_SESSION["f"]["mhost"]) ? $_SESSION["f"]["mhost"] : null; ?>"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">MySQL Port</label>
-                        <input maxlength="200" type="text" required="required" class="form-control"
-                               placeholder="Enter MySQL Port" name="mport"/>
+                        <input type="text" required="required" class="form-control"
+                               placeholder="Enter MySQL Port" name="mport"
+                               value="<?php echo isset($_SESSION["f"]["mport"]) ? $_SESSION["f"]["mport"] : null; ?>"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">MySQL User</label>
-                        <input maxlength="200" type="text" required="required" class="form-control"
-                               placeholder="Enter MySQL User" name="muser"/>
+                        <input type="text" required="required" class="form-control"
+                               placeholder="Enter MySQL User" name="muser"
+                               value="<?php echo isset($_SESSION["f"]["muser"]) ? $_SESSION["f"]["muser"] : null; ?>"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">MySQL Password</label>
-                        <input maxlength="200" type="text" required="required" class="form-control"
-                               placeholder="Enter MySQL Password" name="mpass"/>
+                        <input type="password" required="required" class="form-control"
+                               placeholder="Enter MySQL Password" name="mpass"
+                               value="<?php echo isset($_SESSION["f"]["mpass"]) ? $_SESSION["f"]["mpass"] : null; ?>"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">MySQL Database</label>
-                        <input maxlength="200" type="text" required="required" class="form-control"
-                               placeholder="Enter MySQL Database" name="mdb"/>
+                        <input type="text" required="required" class="form-control"
+                               placeholder="Enter MySQL Database" name="mdb"
+                               value="<?php echo isset($_SESSION["f"]["mdb"]) ? $_SESSION["f"]["mdb"] : null; ?>"/>
                     </div>
                     <br/>
                     <h4>CMS Administrator</h4>
@@ -86,19 +102,40 @@ if (!isset($_SESSION["INSTALL"])) {
                     </div>
                     <hr/>
                     <div class="form-group">
+                        <label class="control-label">First Name</label>
+                        <input type="text" required="required" class="form-control"
+                               placeholder="Enter your new username" name="fname"
+                               value="<?php echo isset($_SESSION["f"]["fname"]) ? $_SESSION["f"]["fname"] : null; ?>"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <input type="text" required="required" class="form-control"
+                               placeholder="Enter your new username" name="name"
+                               value="<?php echo isset($_SESSION["f"]["name"]) ? $_SESSION["f"]["name"] : null; ?>"/>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label">Username</label>
-                        <input maxlength="200" type="text" required="required" class="form-control"
-                               placeholder="Enter your new username" name="username"/>
+                        <input type="text" required="required" class="form-control"
+                               placeholder="Enter your new username" name="username"
+                               value="<?php echo isset($_SESSION["f"]["username"]) ? $_SESSION["f"]["username"] : null; ?>"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Password</label>
-                        <input maxlength="200" type="text" required="required" class="form-control"
-                               placeholder="Enter your new password" name="password"/>
+                        <input type="password" required="required" class="form-control"
+                               placeholder="Enter your new password" name="password"
+                               value="<?php echo isset($_SESSION["f"]["password"]) ? $_SESSION["f"]["password"] : null; ?>"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Repeat Password</label>
-                        <input maxlength="200" type="text" required="required" class="form-control"
-                               placeholder="Repeat your new password" name="password2"/>
+                        <input type="password" required="required" class="form-control"
+                               placeholder="Repeat your new password" name="password2"
+                               value="<?php echo isset($_SESSION["f"]["password2"]) ? $_SESSION["f"]["password2"] : null; ?>"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input type="text" required="required" class="form-control"
+                               placeholder="Repeat your new password" name="email"
+                               value="<?php echo isset($_SESSION["f"]["email"]) ? $_SESSION["f"]["email"] : null; ?>"/>
                     </div>
                     <div class="alert alert-warning">
                         <strong>The developer group is only recommended for people who have a strong understanding of
@@ -108,8 +145,8 @@ if (!isset($_SESSION["INSTALL"])) {
                     <div class="form-group">
                         <label class="control-label">Group</label>
                         <select name="group" class="form-control">
-                            <option value="1" selected>Administrator</option>
-                            <option value="2">Developer (Only for advanced user)</option>
+                            <option value="4" selected>Administrator</option>
+                            <option value="-1">Developer (Only for advanced user)</option>
                         </select>
                     </div>
                     <a href="step1.php" class="btn btn-primary pull-left">Previous</a>
@@ -122,3 +159,7 @@ if (!isset($_SESSION["INSTALL"])) {
 </div>
 </body>
 </html>
+<?php
+unset($_SESSION["f"]);
+unset($_SESSION["error"]);
+?>
