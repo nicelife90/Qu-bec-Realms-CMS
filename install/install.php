@@ -96,7 +96,7 @@ if (!isset($_SESSION["INSTALL"])) {
             $dbh = new PDO("mysql:host=$mhost;port=$mport;", $muser, $mpass, $options);
             $dbh->exec("DROP DATABASE IF EXISTS $mdb;");
         } catch (PDOException $e) {
-            $error[] = "- " . $e->getMessage();
+            $error[] = "- " . $e->getMessage() . "(LINE : " . $e->getLine() . ")";
             $_SESSION["error"] = $error;
             header("Location: step2.php");
             exit;
@@ -111,7 +111,7 @@ if (!isset($_SESSION["INSTALL"])) {
             $dbh->exec("USE $mdb");
             $dbh->exec($install_sql);
         } catch (PDOException $e) {
-            $error[] = "- " . $e->getMessage();
+            $error[] = "- " . $e->getMessage() . "(LINE : " . $e->getLine() . ")";
             $_SESSION["error"] = $error;
             header("Location: step2.php");
             exit;
@@ -156,7 +156,7 @@ if (!isset($_SESSION["INSTALL"])) {
             ]);
             $dbh = null;
         } catch (PDOException $e) {
-            $error[] = "- " . $e->getMessage();
+            $error[] = "- " . $e->getMessage() . "(LINE : " . $e->getLine() . ")";
             $_SESSION["error"] = $error;
             header("Location: step2.php");
             exit;

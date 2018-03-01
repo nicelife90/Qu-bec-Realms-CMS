@@ -31,16 +31,19 @@ use ThreenityCMS\Helpers\Session;
     <meta charset="UTF-8">
     <title>Threenity CMS</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <link rel="icon" type="image/png" href="<?php echo Path::img(); ?>/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo Path::img(); ?>/favicon.ico">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="<?php echo Path::img(); ?>/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo Path::img(); ?>/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?php echo Path::comp(); ?>/bootstrap/dist/css/bootstrap.min.css">
+    <script src="<?php echo Path::comp(); ?>/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo Path::comp(); ?>/bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<?php echo Path::css(); ?>/auth.css">
 </head>
 <body>
-<div class="container">
-    <div class="card card-container">
+
+<div class="bg"></div>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
         <div class="row">
             <div class="col-md-12">
                 <?php
@@ -54,17 +57,24 @@ use ThreenityCMS\Helpers\Session;
                 ?>
             </div>
         </div>
-        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
-        <p id="profile-name" class="profile-name-card"></p>
+        <br/>
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="<?php echo Path::img(); ?>/login.png" id="icon" alt="User Icon"/>
+        </div>
+        <br/>
+        <!-- Login Form -->
         <form class="form-signin" action="<?php echo Path::root(); ?>/login.php" method="post">
             <input type="hidden" name="DBLP" value="<?php echo Session::setFormId('login'); ?>">
-            <span id="reauth-email" class="reauth-email"></span>
-            <input type="text" id="inputEmail" class="form-control" placeholder="Username" name="username" required
+            <input type="text" id="login" class="fadeIn second" placeholder="Username" name="username" required
                    autofocus>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password"
+            <input type="password" id="password" class="fadeIn third" placeholder="Password" name="password"
                    required>
-            <button name="login" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
+            <br/><br/>
+            <input type="submit" class="fadeIn fourth" value="Log In" name="login">
         </form>
+
+
     </div>
 </div>
 </body>
