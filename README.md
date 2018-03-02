@@ -21,6 +21,27 @@ These instructions will get you a copy of the project up and running on your loc
 
 * First you need a fresh install Debian 9.3.0 [Complete Instruction](https://www.howtoforge.com/tutorial/debian-minimal-server/)
 
+When you complete the above Debian 9.3.0 do the following as **ROOT**:
+
+#### Base Configuration
+
+```sh
+$ su
+$ apt-get install php7.0 apache2 mysql-server phpmyadmin git composer -y
+$ mysql_secure_installation
+$ a2enmod rewrite ssl
+$ systemctl restart apache2
+````
+
+#### CMS
+
+```sh
+$ cd /var/www/html/
+$ git clone https://github.com/nicelife90/ThreenityCMS.git ./
+$ composer install
+````
+
+* Complete the installation from your favorite browser by typing your server IP address in the URL bar.
 
 ## Reporting issues
 
@@ -43,7 +64,7 @@ In addition, thoroughly read through the issue tracker guide to ensure your repo
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
 
 
 
