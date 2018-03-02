@@ -54,6 +54,14 @@ $ composer install
 
 * Complete the installation from your favorite browser by typing your server IP address in the URL bar.
 
+## Keeping CMS up to date
+
+```sh
+$ cd /var/www/html/
+$ git git pull
+$ composer update
+````
+
 ## Reporting issues
 
 Issues can be reported via the [Github issue tracker](https://github.com/nicelife90/ThreenityCMS/issues).
