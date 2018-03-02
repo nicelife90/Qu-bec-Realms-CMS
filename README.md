@@ -1,3 +1,5 @@
+# ![logo](https://ibb.co/h3Raqx)
+
 # Threenity CMS
 
 Threenity CMS is designed to simplify management of a World of Warcraft 3.3.5 server as much as possible. It allows to do the complete management of the [TrinityCore 3.3.5](https://github.com/TrinityCore/TrinityCore/tree/3.3.5) Framework.
@@ -37,7 +39,7 @@ In addition, thoroughly read through the issue tracker guide to ensure your repo
 
 ## Authors
 
-* **[Yanick Lafontaine](https://github.com/nicelife90)** - [ThreenityCMS](https://github.com/PurpleBooth)
+**[Yanick Lafontaine](https://github.com/nicelife90)** - [ThreenityCMS](https://github.com/nicelife90/ThreenityCMS)
 
 ## License
 
