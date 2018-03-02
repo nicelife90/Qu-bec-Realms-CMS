@@ -4,9 +4,9 @@
 
 # Threenity CMS
 
-<aside class="notice">
-This project is under heavy development! The cms is not working right now! Come back soon!
-</aside>
+
+#This project is under heavy development! The cms is not working right now! Come back soon!
+
 
 Threenity CMS is designed to simplify management of a World of Warcraft 3.3.5 server as much as possible. It allows to do the complete management of the [TrinityCore 3.3.5](https://github.com/TrinityCore/TrinityCore/tree/3.3.5) Framework.
 
