@@ -165,6 +165,14 @@ if (!isset($_SESSION["INSTALL"])) {
         /**
          * Create .env file
          */
+        $newFileName = $_SERVER["DOCUMENT_ROOT"] . "/.env";
+        if (!is_writable(dirname($newFileName))) {
+            $error[] = "- " . dirname($newFileName) . ' must be writable!';
+            $_SESSION["error"] = $error;
+            header("Location: step2.php");
+            exit;
+        }
+
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
