@@ -1,5 +1,7 @@
 # ![logo](http://i66.tinypic.com/5juwt5.jpg)
 
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/nicelife90/ThreenityCMS.svg)](http://isitmaintained.com/project/nicelife90/ThreenityCMS "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/nicelife90/ThreenityCMS.svg)](http://isitmaintained.com/project/nicelife90/ThreenityCMS "Percentage of issues still open")
+
 # Threenity CMS
 
 Threenity CMS is designed to simplify management of a World of Warcraft 3.3.5 server as much as possible. It allows to do the complete management of the [TrinityCore 3.3.5](https://github.com/TrinityCore/TrinityCore/tree/3.3.5) Framework.
