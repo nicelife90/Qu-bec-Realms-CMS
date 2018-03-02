@@ -1,4 +1,4 @@
-# ![logo](https://ibb.co/h3Raqx)
+# ![logo](http://i66.tinypic.com/5juwt5.jpg)
 
 # Threenity CMS
 
