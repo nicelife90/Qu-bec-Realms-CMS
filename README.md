@@ -31,7 +31,8 @@ $ apt-get install php7.0 apache2 mysql-server phpmyadmin git composer -y
 $ mysql_secure_installation
 $ a2enmod rewrite ssl
 $ systemctl restart apache2
-$ chmod -R 775 /var/html
+$ chown www-data:www-data /var/www/html
+$ chmod 770 /var/www/html
 ````
 
 #### MySQL
