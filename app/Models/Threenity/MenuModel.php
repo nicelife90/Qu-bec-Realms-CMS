@@ -186,6 +186,10 @@ class MenuModel
 	public static function delete($menu_id)
 	{
 
+        if ($menu_id == -1) {
+            throw new Exception("This menu can't be deleted.");
+        }
+
 		$db = Database::get();
 
 		$query = "	DELETE FROM 

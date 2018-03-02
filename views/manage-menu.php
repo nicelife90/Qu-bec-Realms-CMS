@@ -36,32 +36,32 @@ use ThreenityCMS\Models\Threenity\MenuModel;
 
             <div class="row">
                 <div class="col-md-12">
-					<?php
-					if (Request::get('action') && Session::getFormId('manage-menu-link') == Request::get('token')) {
-						try {
-							$message = ManageMenu::action();
-							Messages::success($message);
-						} catch (Exception $e) {
-							Messages::error($e->getMessage());
-						}
-					}
-					?>
+                    <?php
+                    if (Request::get('action') && Session::getFormId('manage-menu-link') == Request::get('token')) {
+                        try {
+                            $message = ManageMenu::action();
+                            Messages::success($message);
+                        } catch (Exception $e) {
+                            Messages::error($e->getMessage());
+                        }
+                    }
+                    ?>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-					<?php
-					if (!is_null(Request::post('add-menu')) && Session::getFormId('add-menu') == Request::post('DBLP')) {
-						try {
-							if (ManageMenu::add()) {
-								Messages::success("Le menu à bien été créé.");
-							}
-						} catch (Exception $e) {
-							Messages::error($e->getMessage());
-						}
-					}
-					?>
+                    <?php
+                    if (!is_null(Request::post('add-menu')) && Session::getFormId('add-menu') == Request::post('DBLP')) {
+                        try {
+                            if (ManageMenu::add()) {
+                                Messages::success("Le menu à bien été créé.");
+                            }
+                        } catch (Exception $e) {
+                            Messages::error($e->getMessage());
+                        }
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -70,7 +70,8 @@ use ThreenityCMS\Models\Threenity\MenuModel;
                 <div class="col-md-12">
 
                     <div class="alert alert-warning">
-                        <p>This page is for advanced users. Mishandling on this page could prevent the CMS from operating normally.</p>
+                        <p>This page is for advanced users. Mishandling on this page could prevent the CMS from
+                            operating normally.</p>
                     </div>
 
 
@@ -78,7 +79,6 @@ use ThreenityCMS\Models\Threenity\MenuModel;
                         <div class="box-header with-border">
                             <h3 class="box-title">Menu</h3>
                         </div>
-
 
 
                         <div class="box-body">
@@ -103,12 +103,12 @@ use ThreenityCMS\Models\Threenity\MenuModel;
                                                     <select name="icon" class="form-control selectpicker"
                                                             data-live-search="true">
                                                         <option value="-1" selected>Select an Icon</option>
-														<?php
-														$icons = FontAwesome::getIcon();
-														foreach ($icons as $key => $value) {
-															echo '<option value="' . $key . '" data-Icon="fa ' . $key . '" ' . (Form::getReturn('icon') == $key ? 'selected' : null) . '>' . $key . '</option>' . "n";
-														}
-														?>
+                                                        <?php
+                                                        $icons = FontAwesome::getIcon();
+                                                        foreach ($icons as $key => $value) {
+                                                            echo '<option value="' . $key . '" data-Icon="fa ' . $key . '" ' . (Form::getReturn('icon') == $key ? 'selected' : null) . '>' . $key . '</option>' . "n";
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -132,32 +132,35 @@ use ThreenityCMS\Models\Threenity\MenuModel;
                                             </tr>
                                             </thead>
                                             <tbody>
-											<?php
+                                            <?php
 
-											$menus = MenuModel::getAll();
-											$token = Session::setFormId('manage-menu-link');
+                                            $menus = MenuModel::getAll();
+                                            $token = Session::setFormId('manage-menu-link');
 
-											while ($menu = $menus->fetchObject()) {
+                                            while ($menu = $menus->fetchObject()) {
 
-												$rm = '?action=delete&menu_id=' . $menu->menu_id . '&token=' . $token;
-												$up = '?action=up&menu_id=' . $menu->menu_id . '&token=' . $token;
-												$down = '?action=down&menu_id=' . $menu->menu_id . '&token=' . $token;
+                                                $rm = '?action=delete&menu_id=' . $menu->menu_id . '&token=' . $token;
+                                                $up = '?action=up&menu_id=' . $menu->menu_id . '&token=' . $token;
+                                                $down = '?action=down&menu_id=' . $menu->menu_id . '&token=' . $token;
 
-												echo '<tr>
+                                                echo '<tr>
                                                 <td>' . $menu->title . '</td>
                                                 <td><i class="fa ' . $menu->icon . '"></i></td>
                                                 <td>' . $menu->display_order . '</td>
-                                                <td>
-                                                
-                                                <a  class="btn btn-danger btn-flat btn-xs" 
-                                                    data-toggle="tooltip" 
-                                                    title="Delete Menu" 
-                                                    onclick="return iconfirm(\'Warning!\',\'Are you sure you want to delete this menu?\', this.href)" 
-                                                    href="' . $rm . '">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                                
-                                                <a  class="btn btn-default btn-flat btn-xs"
+                                                <td>';
+
+                                                if ($menu->menu_id != -1) {
+
+                                                    echo '<a  class="btn btn-danger btn-flat btn-xs" 
+                                                    data-toggle = "tooltip" 
+                                                    title = "Delete Menu" 
+                                                    onclick = "return iconfirm(\'Warning!\',\'Are you sure you want to delete this menu?\', this.href)" 
+                                                    href = "' . $rm . '" >
+                                                    <i class="fa fa-trash-o" ></i >
+                                                    </a>';
+                                                }
+
+                                                echo '<a  class="btn btn-default btn-flat btn-xs"
                                                     data-toggle="tooltip"
                                                     title="Move Up"
                                                     href="' . $up . '">
@@ -172,8 +175,8 @@ use ThreenityCMS\Models\Threenity\MenuModel;
                                                 </a>
                                                 </td>
                                                 </tr>';
-											}
-											?>
+                                            }
+                                            ?>
                                             </tbody>
                                         </table>
                                     </div>

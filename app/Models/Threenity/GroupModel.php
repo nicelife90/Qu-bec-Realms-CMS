@@ -89,7 +89,7 @@ class GroupModel
     {
 
         if ($group_id == -1) {
-            throw new Exception("La suppression de ce groupe n'est pas permise.");
+            throw new Exception("This group can't be deleted.");
         }
 
         $db = Database::get();
