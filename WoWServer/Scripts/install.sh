@@ -27,14 +27,13 @@ apt-get install git clang cmake make gcc g++ libmariadbclient-dev libssl1.0-dev 
 update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
 update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang 100
 
-
 #Download and compile Trinity Core
 cd /var/www/html/WoWServer/
 git clone -b 3.3.5 git://github.com/TrinityCore/TrinityCore.git
 cd TrinityCore
 mkdir build
 cd build
-cmake ../ -DCMAKE_INSTALL_PREFIX=/var/www/html/WoWServer/Server -DTOOLS=1 #TO-DO: ADD variable for DTOOLS and for USER
+cmake ../ -DCMAKE_INSTALL_PREFIX=/var/www/html/WoWServer/Server -DTOOLS=1
 
 #Install Server
 yes | make -j $(nproc) install
@@ -56,19 +55,25 @@ mysql -u $mysql_user -p$mysql_pass < TrinityCore/sql/create/create_mysql.sql
 mv /var/www/html/WoWServer/Server/etc/authserver.conf.dist /var/www/html/WoWServer/Server/etc/authserver.conf
 mv /var/www/html/WoWServer/Server/etc/worldserver.conf.dist /var/www/html/WoWServer/Server/etc/worldserver.conf
 
-#Start server for first time
-/var/www/html/WoWServer/Server/bin/worldserver
-
 #create logs dir
 mkdir /var/www/html/WoWServer/Server/logs
+
+#Get local IP
+local_ip="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
 
 #edit conf file
 sed -i 's#LogsDir = ""#LogsDir = "../logs/"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
 sed -i 's#LogsDir = ""#LogsDir = "../logs/"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
 sed -i 's#DataDir = "."#DataDir = "../data/"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
+sed -i 's#BindIP = "0.0.0.0"#BindIP = "$local_ip"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
+sed -i 's#BindIP = "0.0.0.0"#BindIP = "$local_ip"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
+sed -i 's#LoginDatabaseInfo = "127.0.0.1;3306;trinity;trinity;auth"#LoginDatabaseInfo = "127.0.0.1;3306;$mysql_user;$mysql_pass;auth"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
+sed -i 's#LoginDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;auth"#LoginDatabaseInfo     = "127.0.0.1;3306;$mysql_user;$mysql_pass;auth"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
+sed -i 's#WorldDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;world"#WorldDatabaseInfo     = "127.0.0.1;3306;$mysql_user;$mysql_pass;world"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
+sed -i 's#CharacterDatabaseInfo = "127.0.0.1;3306;trinity;trinity;characters"#CharacterDatabaseInfo = "127.0.0.1;3306;$mysql_user;$mysql_pass;characters"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
 
-#Get local IP
-local_ip="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
+#Start server for first time
+/var/www/html/WoWServer/Server/bin/worldserver
 
 
 

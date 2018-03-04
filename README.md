@@ -36,11 +36,32 @@ $ su
 $ apt-get install php7.0 apache2 mysql-server phpmyadmin git composer net-tools -y
 $ mysql_secure_installation
 $ a2enmod rewrite ssl
-$ systemctl restart apache2
 $ chown www-data:www-data /var/www/html
 $ chmod g+s /var/www/html
 $ chmod u+s /var/www/html
 $ chmod 770 /var/www/html
+$ nano /etc/apache2/apache2.conf
+````
+
+Replace :
+```sh
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+````
+By :
+```sh
+<Directory /var/www/>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+````
+
+```sh
+$ systemctl restart apache2
 ````
 
 #### MySQL
