@@ -33,11 +33,13 @@ When you complete the above Debian 9.3.0 do the following as **ROOT**:
 
 ```sh
 $ su
-$ apt-get install php7.0 apache2 mysql-server phpmyadmin git composer -y
+$ apt-get install php7.0 apache2 mysql-server phpmyadmin git composer net-tools -y
 $ mysql_secure_installation
 $ a2enmod rewrite ssl
 $ systemctl restart apache2
 $ chown www-data:www-data /var/www/html
+$ chmod g+s /var/www/html
+$ chmod u+s /var/www/html
 $ chmod 770 /var/www/html
 ````
 
