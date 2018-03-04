@@ -40,6 +40,8 @@ class ManageServer
 
     public static function installTrinityCore()
     {
+
+        chmod(Path::bash() . '/install.sh', 0750);
         $cmd = Path::bash() . '/install.sh';
 
         $descriptorspec = array(
