@@ -29,7 +29,7 @@ class ManageServer
      */
     public static function valiateServerInstall()
     {
-        if (file_exists('/user/local/WoWServer')) {
+        if (file_exists('/usr/local/WoWServer')) {
             return true;
         } else {
             return false;
