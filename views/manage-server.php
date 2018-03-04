@@ -1,8 +1,19 @@
 <?php
+/**
+ * Copyright (C) 2014 - 2017 Threenity CMS - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary  and confidential
+ * Written by : nicelife90 <yanicklafontaine@gmail.com>
+ * Last edit : 2018
+ *
+ *
+ */
+
 require $_SERVER['DOCUMENT_ROOT'] . '/views/partials/header.php';
 
 use ThreenityCMS\Helpers\Path;
 use ThreenityCMS\Controllers\ManageServer;
+use ThreenityCMS\Helpers\Request;
 
 ?>
     <div class="content-wrapper">
@@ -44,6 +55,23 @@ use ThreenityCMS\Controllers\ManageServer;
                                                 TrinityCore</a>
                                         </div>
                                     <?php } ?>
+
+                                    <?php
+                                    if (!is_null(Request::get("compile"))) {
+                                        ?>
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Compilation</div>
+                                            <div class="panel-body">
+                                                <?php
+                                                ManageServer::installTrinityCore();
+                                                ?>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>

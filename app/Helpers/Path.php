@@ -95,6 +95,18 @@ class Path
         return self::root() . "/dist/img";
     }
 
+
+    /**
+     * Return images path
+     *
+     * @return string
+     */
+    public static function bash()
+    {
+        return $_SERVER['DOCUMENT_ROOT'] . "/app/Bash";
+    }
+
+
     /**
      * Return profile images path
      *
@@ -104,38 +116,6 @@ class Path
     {
         return self::root() . "/dist/img/profiles";
     }
-
-    /**
-     * Return product images path
-     *
-     * @return string
-     */
-    public static function productImg()
-    {
-        return self::root() . "/dist/img/products";
-    }
-
-    /**
-     * Return product images path
-     *
-     * @return string
-     */
-    public static function downloads()
-    {
-        return self::root() . "/downloads";
-    }
-
-
-    /**
-     * Return temp download path
-     *
-     * @return string
-     */
-    public static function temp()
-    {
-        return self::root() . "/downloads/temp";
-    }
-
 
     /**
      * Return PDF path
