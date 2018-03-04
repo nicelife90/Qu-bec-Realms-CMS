@@ -10,6 +10,14 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
+#Make sure CMS is installed
+ENV_FILE="/var/www/html/.env"
+if [ ! -f "$ENV_FILE" ]
+then
+   echo "Install Threenity CMS before running this script!" 1>&2
+   exit 1
+fi
+
 #Initial update
 apt-get update -y
 apt-get upgrade -y

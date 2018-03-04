@@ -62,6 +62,13 @@ $ composer install
 
 * Complete the installation from your favorite browser by typing your server IP address in the URL bar.
 
+#### TrinityCore
+
+```sh
+$ cd /var/www/html/WoWServer/Script
+$ ./install
+````
+
 ## Keeping CMS up to date
 
 ```sh
