@@ -1,3 +1,4 @@
+#!/bin/bash
 
 #Extract DBC MAPS VMAPS MMAPS
 wow=""
@@ -8,19 +9,19 @@ fi
 
 #DBC MAPS
 cd $wow
-/root/server/bin/mapextractor
-mkdir /root/server/data
-cp -r dbc maps /root/server/data
+/var/www/html/WoWServer/Server/bin/mapextractor
+mkdir /var/www/html/WoWServer/Server/data
+cp -r dbc maps /var/www/html/WoWServer/Server/data
 
 #VMAPS
 cd $wow
-/root/server/bin/vmap4extractor
+/var/www/html/WoWServer/Server/bin/vmap4extractor
 mkdir vmaps
-/root/server/bin/vmap4assembler Buildings vmaps
-cp -r vmaps /root/server/data
+/var/www/html/WoWServer/Server/bin/vmap4assembler Buildings vmaps
+cp -r vmaps /var/www/html/WoWServer/Server/data
 
 #MMAPS
 cd $wow
 mkdir mmaps
-/root/server/bin/mmaps_generator
-cp -r mmaps /root/server/data
+/var/www/html/WoWServer/Server/bin/mmaps_generator
+cp -r mmaps /var/www/html/WoWServer/Server/data

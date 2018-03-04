@@ -48,8 +48,7 @@ yes | cp -f TDB_*.sql /var/www/html/WoWServer/Server/bin
 mysql_user="$(grep -oP 'BDD_USER=\K.*' /var/www/html/.env)"
 mysql_pass="$(grep -oP 'BDD_PASS=\K.*' /var/www/html/.env)"
 
-cd ~/
-mysql -u $mysql_user -p$mysql_pass < TrinityCore/sql/create/create_mysql.sql
+mysql -u $mysql_user -p$mysql_pass < /var/www/html/WoWServer/TrinityCore/sql/create/create_mysql.sql
 
 #Prepare conf
 mv /var/www/html/WoWServer/Server/etc/authserver.conf.dist /var/www/html/WoWServer/Server/etc/authserver.conf
