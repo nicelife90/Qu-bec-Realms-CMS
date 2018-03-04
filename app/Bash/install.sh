@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -u
 
 #Initial update
 apt-get update -y
