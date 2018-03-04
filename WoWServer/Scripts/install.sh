@@ -45,8 +45,8 @@ wget $last_db
 yes | cp -f TDB_*.sql /var/www/html/WoWServer/Server/bin
 
 #Install DB
-mysql_user="$(grep -oP 'BBD_USER=\K.*' /var/www/html/.env)"
-mysql_pass="$(grep -oP 'BBD_PASS=\K.*' /var/www/html/.env)"
+mysql_user="$(grep -oP 'BDD_USER=\K.*' /var/www/html/.env)"
+mysql_pass="$(grep -oP 'BDD_PASS=\K.*' /var/www/html/.env)"
 
 cd ~/
 mysql -u $mysql_user -p$mysql_pass < TrinityCore/sql/create/create_mysql.sql
@@ -65,12 +65,12 @@ local_ip="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '(
 sed -i 's#LogsDir = ""#LogsDir = "../logs/"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
 sed -i 's#LogsDir = ""#LogsDir = "../logs/"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
 sed -i 's#DataDir = "."#DataDir = "../data/"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
-sed -i 's#BindIP = "0.0.0.0"#BindIP = "$local_ip"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
-sed -i 's#BindIP = "0.0.0.0"#BindIP = "$local_ip"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
-sed -i 's#LoginDatabaseInfo = "127.0.0.1;3306;trinity;trinity;auth"#LoginDatabaseInfo = "127.0.0.1;3306;$mysql_user;$mysql_pass;auth"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
-sed -i 's#LoginDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;auth"#LoginDatabaseInfo     = "127.0.0.1;3306;$mysql_user;$mysql_pass;auth"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
-sed -i 's#WorldDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;world"#WorldDatabaseInfo     = "127.0.0.1;3306;$mysql_user;$mysql_pass;world"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
-sed -i 's#CharacterDatabaseInfo = "127.0.0.1;3306;trinity;trinity;characters"#CharacterDatabaseInfo = "127.0.0.1;3306;$mysql_user;$mysql_pass;characters"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
+sed -i 's#BindIP = "0.0.0.0"#BindIP = "'${local_ip}'"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
+sed -i 's#BindIP = "0.0.0.0"#BindIP = "'${local_ip}'"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
+sed -i 's#LoginDatabaseInfo = "127.0.0.1;3306;trinity;trinity;auth"#LoginDatabaseInfo = "127.0.0.1;3306;'${mysql_user}';'${mysql_pass}';auth"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
+sed -i 's#LoginDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;auth"#LoginDatabaseInfo = "127.0.0.1;3306;'${mysql_user}';'${mysql_pass}';auth"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
+sed -i 's#WorldDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;world"#WorldDatabaseInfo = "127.0.0.1;3306;'${mysql_user}';'${mysql_pass}';world"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
+sed -i 's#CharacterDatabaseInfo = "127.0.0.1;3306;trinity;trinity;characters"#CharacterDatabaseInfo = "127.0.0.1;3306;'${mysql_user}';'${mysql_pass}';characters"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
 
 #Start server for first time
 /var/www/html/WoWServer/Server/bin/worldserver
