@@ -42,6 +42,8 @@ class ManageServer
     {
 
         chmod(Path::bash() . '/install.sh', 0750);
+        ob_implicit_flush(true);
+        ob_end_flush();
         $cmd = Path::bash() . '/install.sh';
 
         $descriptorspec = array(
@@ -60,6 +62,7 @@ class ManageServer
                 print $s;
                 flush();
             }
+            proc_close($process);
         }
         echo "</pre>";
     }
