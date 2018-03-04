@@ -103,7 +103,7 @@ class Path
      */
     public static function bash()
     {
-        return $_SERVER['DOCUMENT_ROOT'] . "/app/Bash";
+        return "/var/www/html/app/Bash";
     }
 
 
