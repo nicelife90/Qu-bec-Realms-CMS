@@ -39,6 +39,7 @@ cmake ../ -DCMAKE_INSTALL_PREFIX=/var/www/html/WoWServer/Server -DTOOLS=0
 yes | make -j $(nproc) install
 
 #Download and Extract Last DB
+cd /var/www/html/WoWServer/
 last_db="https://github.com/TrinityCore/TrinityCore/releases/download/TDB335.64/TDB_full_world_335.64_2018_02_19.7z"
 wget $last_db
 7zr e TDB_*
@@ -59,10 +60,11 @@ mkdir /var/www/html/WoWServer/Server/logs
 mkdir /var/www/html/WoWServer/Server/data
 
 #download and extract dbc maps vmaps mmaps
+cd /var/www/html/WoWServer/
 data="https://github.com/nicelife90/ThreenityCMS/releases/download/3.3.5/dbc-maps-vmaps-mmaps-3.3.5-en-us.7z"
 wget $data
-7zr e dbc-maps-vmaps-mmaps-3.3.5-en-us.7z
-yes | cp -Rf data/* /var/www/html/WoWServer/Server/data
+7zr x dbc-maps-vmaps-mmaps-3.3.5-en-us.7z data/
+yes | cp -Rf /var/www/html/WoWServer/data/* /var/www/html/WoWServer/Server/data/
 rm -rf data
 
 #Get local IP
