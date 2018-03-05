@@ -23,7 +23,7 @@ apt-get update -y
 apt-get upgrade -y
 
 #Install trinity prerequisite
-apt-get install git clang cmake make gcc g++ libmariadbclient-dev libssl1.0-dev libbz2-dev libreadline-dev libncurses-dev libboost-all-dev p7zip -y
+apt-get install git clang cmake make gcc g++ libmariadbclient-dev libssl1.0-dev libbz2-dev libreadline-dev libncurses-dev libboost-all-dev p7zip net-tools -y
 update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
 update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang 100
 
@@ -33,7 +33,7 @@ git clone -b 3.3.5 git://github.com/TrinityCore/TrinityCore.git
 cd TrinityCore
 mkdir build
 cd build
-cmake ../ -DCMAKE_INSTALL_PREFIX=/var/www/html/WoWServer/Server -DTOOLS=1
+cmake ../ -DCMAKE_INSTALL_PREFIX=/var/www/html/WoWServer/Server -DTOOLS=0
 
 #Install Server
 yes | make -j $(nproc) install
@@ -54,16 +54,24 @@ mysql -u $mysql_user -p$mysql_pass < /var/www/html/WoWServer/TrinityCore/sql/cre
 mv /var/www/html/WoWServer/Server/etc/authserver.conf.dist /var/www/html/WoWServer/Server/etc/authserver.conf
 mv /var/www/html/WoWServer/Server/etc/worldserver.conf.dist /var/www/html/WoWServer/Server/etc/worldserver.conf
 
-#create logs dir
+#create logs and data dir
 mkdir /var/www/html/WoWServer/Server/logs
+mkdir /var/www/html/WoWServer/Server/data
+
+#download and extract dbc maps vmaps mmaps
+data="https://github.com/nicelife90/ThreenityCMS/releases/download/3.3.5/dbc-maps-vmaps-mmaps-3.3.5-en-us.7z"
+wget $data
+7zr e dbc-maps-vmaps-mmaps-3.3.5-en-us.7z
+yes | cp -Rf data/* /var/www/html/WoWServer/Server/data
+rm -rf data
 
 #Get local IP
 local_ip="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
 
 #edit conf file
-sed -i 's#LogsDir = ""#LogsDir = "../logs/"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
-sed -i 's#LogsDir = ""#LogsDir = "../logs/"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
-sed -i 's#DataDir = "."#DataDir = "../data/"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
+sed -i 's#LogsDir = ""#LogsDir = "/var/www/html/WoWServer/Server/logs/"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
+sed -i 's#LogsDir = ""#LogsDir = "/var/www/html/WoWServer/Server/logs/"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
+sed -i 's#DataDir = "."#DataDir = "/var/www/html/WoWServer/Server/data/"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
 sed -i 's#BindIP = "0.0.0.0"#BindIP = "'${local_ip}'"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
 sed -i 's#BindIP = "0.0.0.0"#BindIP = "'${local_ip}'"#g' /var/www/html/WoWServer/Server/etc/worldserver.conf
 sed -i 's#LoginDatabaseInfo = "127.0.0.1;3306;trinity;trinity;auth"#LoginDatabaseInfo = "127.0.0.1;3306;'${mysql_user}';'${mysql_pass}';auth"#g' /var/www/html/WoWServer/Server/etc/authserver.conf
