@@ -107,8 +107,14 @@ class Security
      *
      * @param $access_group
      */
-    public static function validateAccess()
+    public static function validateAccess($register = false)
     {
+
+        if ($register){
+            if (empty($module) || $module == 'index') {
+                Login::redirectRegister();
+            }
+        }
 
         /**
          * Validate login information

@@ -131,6 +131,12 @@ class Login
     }
 
 
+    public static function redirectRegister()
+    {
+
+        Redirect::to('register.php');
+    }
+
     /**
      * Logout current user.
      */

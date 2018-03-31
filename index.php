@@ -24,12 +24,12 @@ use ThreenityCMS\Helpers\Security;
 /**
  * Validate access to the current page
  */
-Security::validateAccess();
+Security::validateAccess(true);
 
 
 /**
  * Redirect to dashboard if user is logged in.
  */
-Login::redirect();
+Login::redirectRegister();
 
 ?>
