@@ -11,3 +11,6 @@ composer.lock
 !/dist/img/products/.gitkeep
 !/downloads/temp/.gitkeep
 /downloads/temp/*
+WoWServer/TrinityCore/
+WoWServer/Server/
+WoWServer/ServerMaster/
